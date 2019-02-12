@@ -26,6 +26,7 @@ interface Props {
   rowClassName: string;
   rowHeight: number;
   sort: any;
+  rowGetter: any;
   rowCount: number;
 }
 
@@ -34,17 +35,17 @@ class MuiVirtualizedTable extends React.Component<Props> {
     headerHeight: 56,
     rowHeight: 56
   };
-  getRowClassName = ({ index }) => {
+  getRowClassName = () => {
     const { classes, rowClassName, onRowClick } = this.props;
-
+    const index = -1;
     return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
       [classes.tableRowHover]: index !== -1 && onRowClick != null
     });
   };
-  headerRender = headerProps => {
+  headerRender = (headerProps:any) => {
     return <Header {...headerProps} {...this.props} />;
   };
-  cellRender = cellProps => {
+  cellRender = (cellProps: any) => {
     return <Cell {...cellProps} {...this.props} />;
   };
   render() {
@@ -99,7 +100,7 @@ class ReactVirtualizedTable extends React.Component<
       <div className={classes.root}>
         <WrappedVirtualizedTable
           rowCount={data.length}
-          rowGetter={({ index }) => data[index]}
+          rowGetter={({ index }: any) => data[index]}
           columns={columns}
           sort={{}}
           rowClassName="asdf"

@@ -29,12 +29,12 @@ class Header extends React.Component<Props> {
       sort
     } = this.props;
 
-    const direction = {
+    const direction: any = {
       [SortDirection.ASC]: "asc",
       [SortDirection.DESC]: "desc"
     };
     console.log(sortBy, sortDirection, headerHeight, sort);
-    const { label, key, numeric, disableSort, width, id } = columns[
+    const { label, key, numeric, disableSort, width } = columns[
       columnIndex
     ];
     const inner =

@@ -10,7 +10,7 @@ export const createData = () => {
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       address: faker.address.streetAddress(),
-      age: faker.random.number(15, 100)
+      age: faker.random.number(100)
     });
   }
   return data;

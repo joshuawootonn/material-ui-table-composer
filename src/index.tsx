@@ -4,17 +4,14 @@ import { render } from "react-dom";
 import { columns, data } from "./data";
 import * as types from "./types";
 import Table from "./Table";
-import { ThemeToggler, Title } from "./contextExample";
 import "./styles.css";
+import asdf from './contextExample'
 
-//<Table data={data} columns={columns} />
 function App() {
   return (
     <div className="App">
       <div className="App-Content">
-        <ThemeToggler>
-          <Title> asdf< /Title>
-        </ThemeToggler>
+       <Table data={data} columns={columns} /> 
       </div>
     </div>
   );
