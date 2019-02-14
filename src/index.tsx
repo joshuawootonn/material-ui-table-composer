@@ -5,27 +5,18 @@ import { columns, data } from "./data";
 import * as types from "./types";
 import Table from "./Table";
 import "./styles.css";
-import {Tooble, ToobleWrapper,defaultState} from './tooble'
-
-class Printer extends React.Component {
-  render() {
-    console.log(this.props);
-    return (<div></div>)
-  }
-}
-
-const WrappedPrinter = ToobleWrapper(Printer)
-
+import {Tooble} from './tooble'
 
 
 function App() {
   return (
     <div className="App">
       <div className="App-Content">
-      <Tooble value={defaultState}>
-        <WrappedPrinter />
+      <Tooble data={data} columns={columns}>
+        <Table 
+        
+        />
       </Tooble>
-       {/* <Table data={data} columns={columns} />  */}
       </div>
     </div>
   );

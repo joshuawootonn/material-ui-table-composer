@@ -13,10 +13,11 @@ import { AutoSizer, Column, SortDirection, Table } from "react-virtualized";
 //import * as TableDataTypes from "constants/tableDataTypes";
 import moment from "moment";
 import "react-virtualized/styles.css";
-//import "./styles.css";
 import * as types from "../types";
 import Header from "./header";
 import Cell from "./cell";
+
+import {ToobleWrapper} from '../tooble'
 
 interface Props {
   classes: any;
@@ -36,11 +37,8 @@ class MuiVirtualizedTable extends React.Component<Props> {
     rowHeight: 56
   };
   getRowClassName = () => {
-    const { classes, rowClassName, onRowClick } = this.props;
-    const index = -1;
-    return classNames(classes.tableRow, classes.flexContainer, rowClassName, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null
-    });
+    const { classes, rowClassName } = this.props;
+    return classNames(classes.tableRow, classes.flexContainer, rowClassName );
   };
   headerRender = (headerProps:any) => {
     return <Header {...headerProps} {...this.props} />;
@@ -90,27 +88,30 @@ interface ReactVirtualizedTableProps {
   columns: types.IColumn[];
   data: types.IData[];
   classes: any;
+  onSelect: any;
+  selected: any;
 }
 class ReactVirtualizedTable extends React.Component<
   ReactVirtualizedTableProps
 > {
   render() {
-    const { columns, data, classes } = this.props;
+    console.log(this.props);
+    const { columns, data, classes, onSelect } = this.props;
     return (
       <div className={classes.root}>
         <WrappedVirtualizedTable
           rowCount={data.length}
           rowGetter={({ index }: any) => data[index]}
           columns={columns}
-          sort={{}}
+          onRowClick={onSelect}
+          sort={() => {}}
           rowClassName="asdf"
           headerHeight={56}
           rowHeight={56}
-          onRowClick={{}}
         />
       </div>
     );
   }
 }
 
-export default withStyles(styles)(ReactVirtualizedTable);
+export default withStyles(styles)(ToobleWrapper(ReactVirtualizedTable));

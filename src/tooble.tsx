@@ -1,20 +1,20 @@
-import React, { ReactNode, ReactElement } from "react";
-import createReactContext, { Context } from "create-react-context";
+import React, { ReactNode, ReactElement } from 'react';
+import createReactContext, { Context } from 'create-react-context';
 
 
-interface ITooble {
-  columns: any;
-  data: any
-}
-export const defaultState: ITooble = {
+const defaultState = {
   columns: [],
   data: []
-}
+};
 
-const {Provider: ToobleProvider, Consumer: ToobleConsumer}: Context<ITooble> = createReactContext(defaultState);
+const { Provider: ToobleProvider, Consumer: ToobleConsumer } = createReactContext(defaultState);
 
-export class Tooble extends React.Component<{value: ITooble} & { children: any} ,ITooble>{
-  state = defaultState;
+
+export class Tooble extends React.Component{
+  state = {
+    data: this.props.data,
+    columns: this.props.columns
+  }
   render() {
     return (
       <ToobleProvider value={this.state}>        
@@ -24,15 +24,15 @@ export class Tooble extends React.Component<{value: ITooble} & { children: any} 
   }
 }
 
-export function ToobleWrapper(WrappedComponent: any) {
+export function ToobleWrapper(WrappedComponent) {
   return function Wrapper(props:any) {
-      return(
-        <ToobleConsumer>
-          { value => (
-            <WrappedComponent {...props} {...value} />
-          )}
-        </ToobleConsumer>
-      )
-    }
+    return(
+      <ToobleConsumer>
+        { value => (
+          <WrappedComponent {...props} {...value} />
+        )}
+      </ToobleConsumer>
+    );
+  };
 }
 
